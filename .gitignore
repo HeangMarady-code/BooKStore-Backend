@@ -1,0 +1,10 @@
+# Keep only the Backend folder in this repository
+# Ignore everything at root level
+/*
+!/.gitignore
+!/README.md
+!/Backend/
+
+# Frontend folders are NOT pushed to this repo
+/frontend_user/
+/frontend_admin/
