@@ -40,7 +40,17 @@ Creates `adminbook@gmail.com` / `admin11112222` as the admin (superuser).
 | Build Command | `pip install -r requirements.txt` |
 | Start Command | `gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT` |
 
-Environment variables: `DATABASE_CONNECTION_URL` (internal Render DB URL), `SECRET_KEY`, `ALGORITHM=HS256`, `ACCESS_TOKEN_EXPIRE_MINUTES=30`.
+Environment variables (REQUIRED — do not skip):
+
+| Key | Value |
+|-----|-------|
+| `PYTHON_VERSION` | `3.12.3` **← critical: prevents Python 3.14 (no wheels → Rust compile failure)** |
+| `DATABASE_CONNECTION_URL` | internal Render DB URL, e.g. `postgresql://user:pass@host/db` |
+| `SECRET_KEY` | long random string |
+| `ALGORITHM` | `HS256` |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | `30` |
+
+> Note: A `runtime.txt` with `python-3.12.3` is also included in the repo, but some Render projects only honor the `PYTHON_VERSION` env var — setting both guarantees Python 3.12.
 
 ## API Endpoints
 
