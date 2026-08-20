@@ -2,8 +2,7 @@
 
 FastAPI + PostgreSQL backend for the Book Store application.
 
-> This repository contains only the **Backend** code.
-> The frontend applications (frontend_user, frontend_admin) are kept out of this repo.
+> This repository contains only the **Backend** code, with the application at the repository root for easy deployment on Render.
 
 ## Features
 
@@ -15,10 +14,9 @@ FastAPI + PostgreSQL backend for the Book Store application.
 ## Quick Start
 
 ```bash
-cd Backend
 pip install -r requirements.txt
 
-# configure .env (see Backend/.env.example)
+# configure .env (see .env.example)
 # then run:
 python -m uvicorn app.main:app --reload
 ```
@@ -28,11 +26,21 @@ Swagger docs: http://localhost:8000/docs
 ## Seed Admin
 
 ```bash
-cd Backend
 python seed_admin.py
 ```
 
 Creates `adminbook@gmail.com` / `admin11112222` as the admin (superuser).
+
+## Deploy on Render
+
+| Field | Value |
+|-------|-------|
+| Language | Python 3 |
+| Root Directory | *(blank — files at repo root)* |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT` |
+
+Environment variables: `DATABASE_CONNECTION_URL` (internal Render DB URL), `SECRET_KEY`, `ALGORITHM=HS256`, `ACCESS_TOKEN_EXPIRE_MINUTES=30`.
 
 ## API Endpoints
 
